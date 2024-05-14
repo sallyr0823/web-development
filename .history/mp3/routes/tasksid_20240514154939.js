@@ -47,6 +47,7 @@ module.exports = function(router) {
             updateInfo.dateCreated = req.body.dateCreated;
         }
         if(req.body.assignedUser) {
+            
             updateInfo.assignedUser = req.body.assignedUser;
         }
         if(req.body.assignedUserName) {
@@ -63,9 +64,10 @@ module.exports = function(router) {
                 });
             }
             
-            var oriUser = await User.findById(oriTask.assignedUser).exec();
+            var oriUser = await User.findOne({'assignedUser': oriTask.assignedUser}).exec();
+            console.log("find ori user")
             console.log(oriUser);
-            if(oriUser.pendingTasks.includes(taskId)) {
+            if(oriUser && oriUser.pendingTasks.includes(taskId)) {
                 oriUser.pendingTasks.pull(taskId);
                 await oriUser.save();
             } 
@@ -77,27 +79,28 @@ module.exports = function(router) {
         }
 
 
-        
-        //console.log(updateInfo);
-// Assuming this code is inside an async function
-        if (updateInfo.assignedUserName) {
+        if (updateInfo.assignedUser) {
             try {
-                const user = await User.findOne({ "name": updateInfo.assignedUserName }).exec();
-
+                const user = await User.findById(updateInfo.assignedUser).exec();
+                console.log(user);
                 if (!user) {
-                    updateInfo.assignedUser = null;
+                    updateInfo.assignedUser = "";
                     updateInfo.assignedUserName = 'unassigned';
                 } else {
-                    if (updateInfo.completed === false) {
+                    updateInfo.assignedUser = user.id;
+                    updateInfo.assignedUserName = user.name;
+                    if (!updateInfo.completed) {
                         if (!user.pendingTasks.includes(taskId)) {
                             user.pendingTasks.push(taskId);
                             const savedUser = await user.save();
+                            console.log("successfully save");
                             console.log(savedUser);
                         }
-                    } else if (updateInfo.completed === true) {
+                    } else  {
                         if (user.pendingTasks.includes(taskId)) {
                             user.pendingTasks.pull(taskId);
                             const savedUser = await user.save();
+                            console.log("successfully move");
                             console.log(savedUser);
                         }
                     }
@@ -128,7 +131,6 @@ module.exports = function(router) {
         var taskId = req.params.id;
         try {
             var delTask = await Tasks.findByIdAndDelete(taskId).exec();
-            console.log(delTask);
             if(delTask == null) {
                 return res.status(404).send({
                     message: 'task not found',
@@ -136,18 +138,12 @@ module.exports = function(router) {
                 });
             }
 
-            if(delTask.assignedUser != null && delTask.assignedUserName != 'unassigned'){
-                try {
-                    var user = await User.findById(delTask.assignedUser).exec();
-                    console.log(user);
-                    user.pendingTasks.pull(taskId);
-                    await user.save();
-                } catch(error) {
-                    res.status(500).send({
-                        message: 'error happen',
-                        data: error.toString()
-                    });
-                }
+            if(delTask.assignedUserName != 'unassigned'){
+                var user = await User.findById(delTask.assignedUser).exec();
+                //console.log(user);
+                user.pendingTasks.pull(taskId);
+                await user.save();
+                
             }
 
             return res.status(200).send({
@@ -161,9 +157,6 @@ module.exports = function(router) {
                 data: err.toString()
             });
         }
-
-
-
     });
     return router;
 }

@@ -9,7 +9,7 @@ module.exports = function(router) {
             if(tasksData == null) {
                 res.status(404).send({
                     message: 'task not found',
-                    data: userData
+                    data: tasksData
                 });
             } else {
                 res.status(200).send({
@@ -21,7 +21,7 @@ module.exports = function(router) {
         }).catch(function(err) {
             res.status(500).send({
                 message: 'error happen',
-                data: err.tostring()
+                data: err.toString()
             });
         });
     });
@@ -47,62 +47,60 @@ module.exports = function(router) {
             updateInfo.dateCreated = req.body.dateCreated;
         }
         if(req.body.assignedUser) {
+            
             updateInfo.assignedUser = req.body.assignedUser;
         }
         if(req.body.assignedUserName) {
             updateInfo.assignedUserName = req.body.assignedUserName;
         }
 
- 
-        Tasks.findById(taskId).exec().then(function(oriTask) {
+        try {
+            var oriTask = await Tasks.findById(taskId).exec();
+            
             if(oriTask == null) {
                 return res.status(404).send({
                     message: 'no task matching this id',
                     data: oriTask
                 });
             }
-            User.findById(oriTask.assignedUser).exec().then(async function(oriUser) {
-                try{
-                    if(oriUser.pendingTasks.includes(taskId)) {
-                        oriUser.pendingTasks.pull(taskId);
-                        await oriUser.save();
-                    }
-                } catch(err) {
-                    return res.status(500).send({
-                        message: 'error happen',
-                        data: err.toString()
-                    });
-                };
-                
-            });
-        }).catch(function(err) {
-            res.status(500).send({
-                message: 'error happen',
+            
+            var oriUser = await User.findOne({'assignedUser': oriTask.assignedUser}).exec();
+            console.log("find ori user")
+            console.log(oriUser);
+            if(oriUser && oriUser.pendingTasks.includes(taskId)) {
+                oriUser.pendingTasks.pull(taskId);
+                await oriUser.save();
+            } 
+        } catch (err) {
+            return res.status(500).send({
+                message: 'error happen 1 ',
                 data: err.toString()
             });
-        });
+        }
 
-        
-        //console.log(updateInfo);
-// Assuming this code is inside an async function
-        if (updateInfo.assignedUserName) {
+
+        if (updateInfo.assignedUser) {
             try {
-                const user = await User.findOne({ "name": updateInfo.assignedUserName }).exec();
-
+                const user = await User.findById(updateInfo.assignedUser).exec();
+                console.log(user);
                 if (!user) {
-                    updateInfo.assignedUser = null;
+                    updateInfo.assignedUser = "";
                     updateInfo.assignedUserName = 'unassigned';
                 } else {
-                    if (updateInfo.completed === false) {
+                    updateInfo.assignedUser = user.id;
+                    updateInfo.assignedUserName = user.name;
+                    if (!updateInfo.completed) {
                         if (!user.pendingTasks.includes(taskId)) {
                             user.pendingTasks.push(taskId);
                             const savedUser = await user.save();
+                            console.log("successfully save");
                             console.log(savedUser);
                         }
-                    } else if (updateInfo.completed === true) {
+                    } else  {
                         if (user.pendingTasks.includes(taskId)) {
                             user.pendingTasks.pull(taskId);
                             const savedUser = await user.save();
+                            console.log("successfully move");
                             console.log(savedUser);
                         }
                     }
@@ -126,46 +124,39 @@ module.exports = function(router) {
                 message: 'error happen',
                 data: err.toString()
             })});
-
-
     });
 
 
-    tasksIdRoute.delete(function(req, res) {
+    tasksIdRoute.delete(async function(req, res) {
         var taskId = req.params.id;
-        Tasks.findByIdAndDelete(taskId).exec().then(async function(data) {
-            if(data == null) {
+        try {
+            var delTask = await Tasks.findByIdAndDelete(taskId).exec();
+            if(delTask == null) {
                 return res.status(404).send({
-                    message: 'user not found',
+                    message: 'task not found',
                     data: []
                 });
-            };
-            if(data.assignedUser != null && data.assignedUserName != 'unassigned'){
-                try {
-                    var user = await User.findById(data.assignedUser);
-                    user.pendingTasks.pull(taskId);
-                    await user.save();
-                } catch(error) {
-                    res.status(500).send({
-                        message: 'error happen',
-                        data: error.toString()
-                    });
-                }
             }
+
+            if(delTask.assignedUserName != 'unassigned'){
+                var user = await User.findById(delTask.assignedUser).exec();
+                //console.log(user);
+                user.pendingTasks.pull(taskId);
+                await user.save();
+                
+            }
+
             return res.status(200).send({
-                message: 'successfully delete the user',
-                data: data
+                message: 'successfully delete the task',
+                data: delTask
             });
-            
-        }).catch(function(err) {
+
+        } catch(err) {
             return res.status(500).send({
                 message: 'error happen when deleting task',
                 data: err.toString()
             });
-        });
-
-
-
+        }
     });
     return router;
 }
