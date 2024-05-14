@@ -1,0 +1,62 @@
+/* Your SCSS here. */
+
+.body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+}
+.header {
+    position: fixed;
+    top:0;
+    background-color: darkslategray;
+    height: 3vh;
+    max-height: 3vh;
+    width: 100%;
+    max-width: 100%;
+    z-index:9999;
+    display: flex;
+    flex-flow: row wrap;
+    gap:10px;
+    list-style: none;
+    
+    
+}
+.header.nav1{
+    display: block;
+    //flex-grow: 3;
+    justify-content: flex-start;
+}
+.header.nav2{
+    display: block;
+    //flex-grow: 1;
+    justify-content: flex-end;
+}
+
+
+.foot {
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    bottom:0px;
+    background-color: darkslategray;
+    height: 10vh;
+    max-height: 10vh;
+}
+.p1{
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    background-color: rgb(146, 81, 147);
+    height: 20vh;
+    max-height: 20vh;    
+}
+.p2{
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    background-color: #ffffff;
+    height: 20vh;
+    max-height: 20vh;
+}

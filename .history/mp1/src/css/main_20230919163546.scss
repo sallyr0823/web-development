@@ -1,0 +1,31 @@
+/* Your SCSS here. */
+
+
+.element {
+    //display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    margin:0;
+    padding:0;
+    display:inline-block;
+}
+.element.header {
+    position: relative;
+    background-color: darkslategray;
+    height: 5%;
+    max-height: 5%;
+}
+.element.header.foot {
+    position:absolute;
+    bottom: 0px;
+}
+.element.p1{
+    background-color: rgb(146, 81, 147);
+    height: 20%;
+    max-height: 20%;
+}
+.element.p2{
+    background-color: #ffffff;
+    height: 30%;
+    max-height: 30%;
+}

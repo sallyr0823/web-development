@@ -1,0 +1,38 @@
+/* App.css */
+
+.App {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  color: #333;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+}
+
+/* ... previous styles ... */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.gallery img {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+

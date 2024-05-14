@@ -1,0 +1,148 @@
+/* Your SCSS here. */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html {
+    font-family: "Roboto Mono";
+    scroll-behavior: smooth;
+  }
+  section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+   #carousel {
+    background-color: royalblue;
+  }
+  #multicol {
+    
+    background-color: aquamarine;
+    display: flex;
+    gap:30px;
+    flex:1;
+    justify-content: space-between;
+
+  }
+
+  #multicol .column {
+    float: left;
+    background-color: #ffffff;
+    height:80%;
+    width: 20%;
+    padding: 20px 40px;
+  }
+  #contact {
+    background-color: royalblue;
+  }
+  #line4 {
+    background-color: aquamarine;;
+  }
+  #footer {
+    height: 10vh;
+    background-color: #ffffff;
+  }
+  .carousel_container{
+    padding:0;
+  }
+  .carousel_track {
+    padding :0;
+    margin :0;
+    list-style: none;
+  }
+  .carousel_slide {
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    width:100%;
+
+  }
+  .carousel_image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .carousel_button {
+    position: absolute;
+    top:50%;
+    right:0;
+    height:5%;
+    width: 5%;
+    background: white;
+    cursor:pointer;
+    z-index: 99999;
+  }
+  .carousel_button img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .showup {
+    animation-name: showup;
+    animation-duration: 2s;
+  }
+
+  
+
+
+  nav {
+    position: sticky;
+    width: 100%;
+    max-width: 100%;
+    height: 15vh;
+    max-height: 20vh;
+    top: 0;
+    background-color: white;
+    text-align: center;
+  }
+  nav .container {
+    margin: 0 0 0 0;
+    text-align: right;
+    padding: 10px;
+    font-size: 20px;
+  }
+  
+  nav .container ul li {
+    display: inline-block;
+
+  }
+
+  nav .container ul li.title {
+    left: 10%;
+    width: 40%;
+    margin: 0 0 0 0;
+    text-align: left;
+    padding: 10px;
+  }
+  nav .container ul li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    color: black;
+  }
+
+  nav .container ul li a:hover{
+    background-color: crimson;
+    color:rgb(255, 255, 255);
+  }
+  nav .container ul li.active {
+    background-color: crimson;
+    transition: 0.3s ease background-color;
+  }
+  nav .container ul li.active a {
+    color: rgb(255, 255, 255);
+  }
+  
+  @keyframes showup {
+    from {opacity: 1}
+    to {opacity: 0}
+  }

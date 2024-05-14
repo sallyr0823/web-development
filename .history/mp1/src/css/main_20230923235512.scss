@@ -1,0 +1,224 @@
+/* Your SCSS here. */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html {
+    font-family: "Roboto Mono";
+    scroll-behavior: smooth;
+  }
+  section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-color: gray;
+    text-transform: uppercase;
+  }
+   #carousel {
+    background-color: royalblue;
+  }
+  #multicol {
+    
+    background-color: royalblue;
+    display: flex;
+    gap:30px;
+    flex:1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+  }
+
+  #multicol .column {
+    display: flex;
+    position: relative; 
+    background-color: #ffffff;
+    height:30%;
+    width: 20%;
+    margin: 40px;
+    flex-basis: 25%;
+    justify-content: center;
+  }
+
+  #multicol .column p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #multicol .column button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background-image: url("../assets/image.jpg");
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+  #multicol .column:hover button {
+    opacity: 0.6;
+  }
+
+
+  .modalWin {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    background-color: purple;
+    justify-content: center;
+    z-index: 99999;
+  }
+
+
+  .modalContent {
+    display: flex;
+    position:absolute;
+    background-color: gainsboro;
+    margin:  auto;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .modalClose {
+    font-size: 28px;
+    font-weight: bold;
+    float:right;
+    margin: 5%;
+    right : 5%;
+
+  }
+  .modalClose:hover {
+  cursor: pointer;
+  
+  }
+
+
+  #bg {
+    position: sticky;
+    background-image: url("../assets/bg.jpeg");
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position: center;
+    background-size: cover;
+  }
+
+  #line4 {
+    background-color: aquamarine;;
+  }
+  #footer {
+    height: 10vh;
+    background-color: #ffffff;
+  }
+  .carousel_container{
+    padding:0;
+  }
+  .carousel_track {
+    padding :0;
+    margin :0;
+    list-style: none;
+  }
+  .carousel_slide {
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    width:100%;
+
+  }
+  .carousel_image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .carousel_button {
+    position: absolute;
+    top:50%;
+    right:0;
+    height:5%;
+    width: 5%;
+    background: white;
+    cursor:pointer;
+    z-index: 100;
+  }
+  .carousel_button img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .showup {
+    animation-name: showup;
+    animation-duration: 2s;
+  }
+
+  
+
+
+  nav {
+    position: sticky;
+    width: 100%;
+    max-width: 100%;
+    height: 15vh;
+    max-height: 20vh;
+    top: 0;
+    background-color: white;
+    text-align: center;
+    z-index: 10000;
+  }
+  nav .container {
+    margin: 0 0 0 0;
+    text-align: right;
+    padding: 10px;
+    font-size: 20px;
+  }
+  
+  nav .container ul li {
+    display: inline-block;
+
+  }
+
+  nav .container ul li.title {
+    left: 10%;
+    width: 40%;
+    margin: 0 0 0 0;
+    text-align: left;
+    padding: 10px;
+  }
+  nav .container ul li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    color: black;
+  }
+
+  nav .container ul li a:hover{
+    background-color: crimson;
+    color:rgb(255, 255, 255);
+  }
+  nav .container ul li.active {
+    background-color: crimson;
+    transition: 0.3s ease background-color;
+  }
+  nav .container ul li.active a {
+    color: rgb(255, 255, 255);
+  }
+  
+  @keyframes showup {
+    from {opacity: 1}
+    to {opacity: 0}
+  }

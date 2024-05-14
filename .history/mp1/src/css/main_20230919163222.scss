@@ -1,0 +1,23 @@
+/* Your SCSS here. */
+
+
+.element {
+    //display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    margin:0;
+    padding:0;
+}
+.element.header {
+    position: relative;
+    background-color: darkslategray;
+    height: 50px;
+    max-height: 50px;
+}
+.element.header.foot {
+    position:absolute;
+    bottom: 0px;
+}
+.element.p1{
+
+}

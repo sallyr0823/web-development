@@ -1,0 +1,89 @@
+/* Your SCSS here. */
+
+.body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+}
+html {
+    scroll-behavior: smooth;
+  }
+.header {
+    position: fixed;
+    top: 0;
+    background-color: darkslategray;
+    height: 5vh;
+    max-height: 5vh;
+    width: 100%;
+    max-width: 100%;
+    z-index: 9999;
+    font-size: 20px;
+}
+
+.header ul {
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    justify-content: flex-end;
+    margin-top: 0px;
+}
+.header li {
+    margin: 0;
+    padding: 0;
+}
+.header .nav1 {
+    position: absolute;
+    display: block;
+    align-items: center;
+    left: 20%;
+    margin-top: 2px;
+    width: 50%;
+    font-size: 24px;
+}
+.header .nav2 {
+    display: block;
+    justify-content: flex-end;
+    margin-top: 2px;
+    margin-right: 50px;
+}
+.header .nav2:hover {
+    background-color:  rgb(70, 64, 101);;
+}
+
+.header ul li.active {
+    background-color: crimson;
+    transition: 0.3s ease background-color;
+    align-self: center;
+}
+.header ul li.active a{
+    color: #ffffff;
+    background-color: crimson;
+}
+
+.foot {
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    bottom:0px;
+    background-color: darkslategray;
+    height: 10vh;
+    max-height: 10vh;
+}
+.content.p1{
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    background-color: rgb(146, 81, 147);
+    height: 20vh;
+    max-height: 20vh;    
+}
+.content.p2{
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    background-color: #ffffff;
+    height: 20vh;
+    max-height: 20vh;
+}

@@ -1,0 +1,49 @@
+/* Your SCSS here. */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+}
+.element {
+    width: 100%;
+    max-width: 100%;
+    //flex-direction: column;
+}
+.element.header {
+    display: inline-flex;
+    position: fixed;
+    top:0;
+    background-color: darkslategray;
+    height: 3vh;
+    max-height: 3vh;
+    z-index:9999;
+    flex-direction: row;
+}
+.nav{
+    flex: 1;
+    flex-direction: row;
+}
+
+
+.element.foot {
+    position: absolute;
+    bottom:0px;
+    background-color: darkslategray;
+    height: 10vh;
+    max-height: 10vh;
+}
+.element.p1{
+    position: relative;
+    background-color: rgb(146, 81, 147);
+    height: 20vh;
+    max-height: 20vh;    
+}
+.element.p2{
+    position: relative;
+    background-color: #ffffff;
+    height: 20vh;
+    max-height: 20vh;
+}

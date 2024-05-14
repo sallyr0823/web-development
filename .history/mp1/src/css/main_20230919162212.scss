@@ -1,0 +1,19 @@
+/* Your SCSS here. */
+
+
+.element {
+    display: inline-block;
+    width: 100%;
+}
+#element header {
+    position: relative;
+    background-color: darkslategray;
+    height: 100px;
+    max-height: 100px;
+}
+#element foot {
+    background-color: darkslategray;
+    position:absolute;
+    height: 100px;
+    bottom: 0px;
+}
